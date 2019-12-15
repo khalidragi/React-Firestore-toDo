@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import NewTaskForm from './components/NewTaskForm';
+import TaskList from './components/TasksList';
+import ToDoList from './components/ToDoList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    tasks: [
+      {
+        task: 'do demo'
+      },
+      {
+        task: 'add new'
+      }
+    ]
+  };
+
+  newTask = task => {
+    this.setState({
+      tasks: [...this.state.tasks, task]
+    });
+  };
+
+  render() {
+    return (
+      <div className='App grey lighten-4'>
+        <header className='App-header'>
+          <blockquote>React-Firestore toDo</blockquote>
+        </header>
+        <div className='container row'>
+          <div className='col s4 card-panel '>
+            <TaskList tasks={this.state.tasks} />
+            <NewTaskForm newTask={this.newTask} />
+          </div>
+          <div className='col s7 offset-3 right '>
+            <ToDoList />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
