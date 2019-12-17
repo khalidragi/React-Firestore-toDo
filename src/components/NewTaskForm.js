@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 
-const NewTaskForm = ({ newTask }) => {
+const NewTaskForm = ({ addNewTask }) => {
   const [task, setTask] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    newTask({ task, toDo: [] });
+    addNewTask(task);
     setTask('');
   };
 
   return (
     <div className='input-field'>
       <form onSubmit={handleSubmit}>
-        <i className='material-icons prefix'>add_box</i>
         <input
           id='task'
           type='text'
           value={task}
           onChange={e => setTask(e.target.value)}
+          placeholder='Add New Task'
         />
-        <label htmlFor='task'>New Task</label>
       </form>
     </div>
   );
