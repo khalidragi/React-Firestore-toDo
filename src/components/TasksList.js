@@ -1,17 +1,8 @@
 import React from 'react';
-import firebase from '../firebase';
 
 const TaskList = ({ tasks, selectedTask }) => {
   const selectTask = (e, id) => {
     selectedTask(e.target.innerText, id);
-  };
-
-  const deleteToDo = id => {
-    firebase
-      .firestore()
-      .collection('toDos')
-      .doc(id)
-      .delete();
   };
 
   return (

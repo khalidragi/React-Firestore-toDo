@@ -41,7 +41,7 @@ const App = () => {
         });
         setToDoList(toDos);
       });
-    console.log(toDoList);
+    console.log(currentTaskId);
   };
 
   const addNewTask = task => {
@@ -61,15 +61,16 @@ const App = () => {
         </div>
       </nav>
       <div className='container row'>
-        <div className='col s4'>
+        <div className='col s6 m5 l4'>
           <TaskList tasks={toDos} selectedTask={selectedTask} />
           <NewTaskForm addNewTask={addNewTask} />
         </div>
-        <div className='col s7 offset-3 right '>
+        <div className='col s6 m7 l7 offset-l1 right '>
           <ToDoList
             toDoList={toDoList}
             currentTask={currentTask}
             currentTaskId={currentTaskId}
+            tasks={toDos}
           />
         </div>
       </div>

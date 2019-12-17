@@ -3,7 +3,12 @@ import AddToDo from './AddToDo';
 import firebase from '../firebase';
 
 const ToDoList = ({ toDoList, currentTask, currentTaskId }) => {
-  const [toDos, setToDos] = useState([]);
+  const [toDos] = useState([]);
+  const [taskId, setTaskId] = useState('');
+
+  useEffect(() => {
+    setTaskId(currentTaskId);
+  }, [currentTaskId]);
 
   const addNewToDo = todo => {
     firebase
@@ -24,9 +29,18 @@ const ToDoList = ({ toDoList, currentTask, currentTaskId }) => {
       .delete();
   };
 
+  const deleteTask = () => {
+    firebase
+      .firestore()
+      .collection('toDos')
+      .doc(currentTaskId)
+      .delete();
+    setTaskId('');
+  };
+
   return (
     <>
-      {currentTask ? (
+      {taskId ? (
         <>
           <ul className='collection with-header row '>
             <li className='collection-header'>
@@ -55,6 +69,11 @@ const ToDoList = ({ toDoList, currentTask, currentTaskId }) => {
               : null}
           </ul>
           <AddToDo addNewToDo={addNewToDo} />
+          <div
+            onClick={deleteTask}
+            className='right red-text btn-flat btn-small transparent'>
+            Delete Task
+          </div>
         </>
       ) : null}
     </>

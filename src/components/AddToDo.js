@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import firebase from '../firebase';
 
 const AddToDo = ({ addNewToDo, currentTaskId }) => {
   const [toDo, setToDo] = useState('');
@@ -8,7 +7,6 @@ const AddToDo = ({ addNewToDo, currentTaskId }) => {
     e.preventDefault();
     addNewToDo(toDo);
     setToDo('');
-    console.log(toDo);
   };
 
   return (
